@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/bootstrap.min.css' %}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ebc14e;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* S'assure que le body prend toute la hauteur de l'écran */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.1); /* Fond semi-transparent */
+            padding: 20px; /* Pour que le contenu ne touche pas les bords */
+        }
+
+        .form-box {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form-title {
+            font-size: 26px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            width: 100%;
+            margin-top: 5px;
+            box-sizing: border-box; /* Assure que les padding ne font pas dépasser le champ */
+        }
+
+        .form-control:focus {
+            border-color: #f26522;
+            box-shadow: 0 0 5px rgba(242, 101, 34, 0.5);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #f26522;
+            border: none;
+            color: #fff;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #d9541e;
+        }
+
+        .btn-submit:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .text-danger {
+            color: #ff0000;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-footer a {
+            color: #f26522;
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Empêcher le débordement de contenu */
+        @media (max-width: 500px) {
+            .form-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-box">
+            <h1 class="form-title">Sign Up</h1>
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="id_username">Username</label>
+                    <input type="text" name="username" class="form-control" id="id_username" value="{{ form.username.value }}">
+                    {% for error in form.username.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_email">Email</label>
+                    <input type="email" name="email" class="form-control" id="id_email" value="{{ form.email.value }}">
+                    {% for error in form.email.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password1">Password</label>
+                    <input type="password" name="password1" class="form-control" id="id_password1" value="{{ form.password1.value }}">
+                    {% for error in form.password1.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password2">Confirm Password</label>
+                    <input type="password" name="password2" class="form-control" id="id_password2" value="{{ form.password2.value }}">
+                    {% for error in form.password2.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_address">Address</label>
+                    <input type="text" name="address" class="form-control" id="id_address" value="{{ form.address.value }}">
+                    {% for error in form.address.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_phone">Phone</label>
+                    <input type="text" name="phone" class="form-control" id="id_phone" value="{{ form.phone.value }}">
+                    {% for error in form.phone.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- Case à cocher pour accepter les conditions -->
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="accept_terms"> I accept the <a href="{% url 'cgu' %}" target="_blank">terms and conditions</a>.
+                    </label>
+                </div>
+
+                <button type="submit" id="submit_btn" class="btn-submit" disabled>Sign Up</button>
+            </form>
+
+            <div class="form-footer">
+                <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript pour activer/désactiver le bouton en fonction de la case à cocher
+        const checkbox = document.getElementById('accept_terms');
+        const submitBtn = document.getElementById('submit_btn');
+
+        checkbox.addEventListener('change', function() {
+            submitBtn.disabled = !this.checked;
+        });
+    </script>
+</body>
+</html>
