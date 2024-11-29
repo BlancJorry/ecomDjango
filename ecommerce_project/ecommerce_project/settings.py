@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-c2v1q89wrz_36(m78r1!%yx+l@cbzo)hp93c#=$4!#$k)n12*y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['Shop&Go.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','ecomdjango-kktb.onrender.com']
 
 
 # Application definition
