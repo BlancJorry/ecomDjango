@@ -23,6 +23,7 @@ urlpatterns = [
     path('cgu/', lambda request: render(request, 'shop/cgu.html'), name='cgu'),
 ]
 if settings.DEBUG is False:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 from django.conf.urls import handler404, handler500, handler403, handler400

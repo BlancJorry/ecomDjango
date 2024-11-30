@@ -140,3 +140,6 @@ LOGOUT_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'shop.CustomUser'
 
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'shop/static'),
+]
