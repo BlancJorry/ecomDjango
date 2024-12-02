@@ -22,9 +22,11 @@ urlpatterns = [
     path('order/cart/', views.order_from_cart, name='order_from_cart'),
     path('cgu/', lambda request: render(request, 'shop/cgu.html'), name='cgu'),
 ]
-if settings.DEBUG is False:
+if settings.DEBUG :
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
 
 from django.conf.urls import handler404, handler500, handler403, handler400
 

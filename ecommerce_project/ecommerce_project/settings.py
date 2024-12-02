@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c2v1q89wrz_36(m78r1!%yx+l@cbzo)hp93c#=$4!#$k)n12*y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost','ecomdjango-kktb.onrender.com']
 
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'ecommerce_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],#os.path.join(BASE_DIR,'templates')
+        'DIRS': [os.path.join(BASE_DIR, 'shop/templates')],#os.path.join(BASE_DIR,'templates')
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,6 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'shop/static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
@@ -140,6 +141,4 @@ LOGOUT_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'shop.CustomUser'
 
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'shop/static'),
-]
+
