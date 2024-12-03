@@ -1,1 +1,1 @@
-web: waitress-serve --port=$PORT ecommerce_project.wsgi:application
+gunicorn ecommerce_project.ecommerce_project.wsgi:application --bind 0.0.0.0:$PORT
